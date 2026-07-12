@@ -1,0 +1,13 @@
+# 项目数据目录(含本地记忆/日志,勿上传)
+.workbuddy/
+
+# 依赖与本地环境
+node_modules/
+.env
+.env.*
+*.local
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+*.log

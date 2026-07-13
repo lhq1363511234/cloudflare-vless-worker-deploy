@@ -7,7 +7,7 @@
 **① 免费探针鸡**
 
 VPS + `fscarmen 一键脚本` (Reality)
-免费（著名的google300刀 ![:zany_face:](https://cdn.ldstatic.com/images/emoji/twemoji/zany_face.png?v=15)）
+免费（著名的google300刀）
 
 看 VPS 线路
 中（怕被墙）
@@ -21,7 +21,7 @@ Cloudflare Workers + **自动部署脚本**
 **强烈推荐！** 追求极致白嫖、不想管服务器死活的佬友。
 
 **③ 应急大厂羊毛**
-Cloudflare WARP / ProtonVPN / ![:zany_face:](https://cdn.ldstatic.com/images/emoji/twemoji/zany_face.png?v=15)nthlink /lantern
+Cloudflare WARP / ProtonVPN / nthlink /lantern
 
 > 📷 **[图1 · 方案总览截图]**　替换为图床/上传后的链接（原图为本机 Typora 本地图片，已移除以免裂图）
 
@@ -32,7 +32,7 @@ Cloudflare WARP / ProtonVPN / ![:zany_face:](https://cdn.ldstatic.com/images/emo
 
 ## **方案一：免费小鸡 (VPS) + 一键傻瓜脚本**
 
-甲骨文、谷歌云、各种云（Oracle Cloud:visa申请可以去YouTube搜索如何免费注册）（ ![:zany_face:](https://cdn.ldstatic.com/images/emoji/twemoji/zany_face.png?v=15)踩的坑多了，自然就知道怎么免费注册visa了）
+甲骨文、谷歌云、各种云（Oracle Cloud:visa申请可以去YouTube搜索如何免费注册）（ 踩的坑多了，自然就知道怎么免费注册visa了）
 
 不用手写 config，直接用大佬的脚本。
 
@@ -69,7 +69,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-
 
 > 📷 **[图3 · Node.js 与脚本就绪截图]**　替换为图床/上传后的链接
 
-### **2. 获取 CF 的必要字符串 ![:zany_face:](https://cdn.ldstatic.com/images/emoji/twemoji/zany_face.png?v=15) [这里可以参考这位佬友，其中github脚本也来自这位佬友](https://linux.do/t/topic/2401836)**
+### **2. 获取 CF 的必要字符串  [这里可以参考这位佬友，其中github脚本也来自这位佬友](https://linux.do/t/topic/2401836)**
 
 登录 Cloudflare 网页后台，按 `F12` 打开开发者工具：
 
@@ -99,7 +99,7 @@ node deploy-cloudflare-vless.mjs \
 
 *如果报错提示 Cookie 拦截，可以加完整参数：*
 
-![:zany_face:](https://cdn.ldstatic.com/images/emoji/twemoji/zany_face.png?v=15)**报错就让workbuddy检测修复**
+**报错就让workbuddy检测修复**
 
 > 📷 **[图6 · 部署报错示例截图]**　替换为图床/上传后的链接
 

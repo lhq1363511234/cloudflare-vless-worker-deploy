@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloudflare VLESS 一键部署</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Cloudflare VLESS 一键部署</h1>
+    <p class="sub">填好下面的信息，点「部署」，坐等订阅地址。</p>
+
+    <form id="deploy-form">
+      <fieldset>
+        <legend>必填</legend>
+        <label>Cloudflare Account ID
+          <input type="text" name="accountId" placeholder="a00e7e97..." required />
+        </label>
+        <label>根域名 (Zone)
+          <input type="text" name="zone" placeholder="example.com" required />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>登录态（二选一）</legend>
+        <label>vses2（或完整 Cookie）
+          <input type="text" name="vses2" placeholder="cfes-..." autocomplete="off" />
+        </label>
+        <label>完整 Cookie（被拦截时填这个）
+          <input type="text" name="cookie" placeholder="vses2=...; cf_clearance=..." autocomplete="off" />
+        </label>
+        <label>x-atok（可选）
+          <input type="text" name="atok" placeholder="x-atok 值" autocomplete="off" />
+        </label>
+        <label>或已有 API Token
+          <input type="text" name="token" placeholder="已有 Token 直接填这" autocomplete="off" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>可选</legend>
+        <label>子域名 (hostname)
+          <input type="text" name="hostname" placeholder="随机生成，如 ab12.example.com" />
+        </label>
+        <label>Worker 名
+          <input type="text" name="workerName" placeholder="随机，如 svc-xxxxxxxx" />
+        </label>
+        <label>固定 UUID
+          <input type="text" name="uuid" placeholder="留空则随机生成" />
+        </label>
+      </fieldset>
+
+      <fieldset class="checks">
+        <label class="check"><input type="checkbox" name="assumeNsReady" checked /> 域名 NS 已设置为 Cloudflare 分配的两台</label>
+        <label class="check"><input type="checkbox" name="skipTest" checked /> 跳过代理测速（Termux 无 mihomo）</label>
+      </fieldset>
+
+      <button type="submit" id="deploy-btn">部署</button>
+    </form>
+
+    <section id="log" class="log" hidden></section>
+
+    <section id="result" class="result" hidden>
+      <h2>部署完成 🎉</h2>
+      <p>订阅地址：</p>
+      <div class="sub-row">
+        <code id="sub-url"></code>
+        <button id="copy-btn" type="button">复制</button>
+      </div>
+      <p class="hint">把这个地址导入 Clash Verge / v2rayN / Mihomo 即可使用。</p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

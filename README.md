@@ -127,3 +127,46 @@ node deploy-cloudflare-vless.mjs \
 最后，所有免费资源随时可能被大厂回收/调整策略。
 
 **觉得有用的佬友，点赞/收藏支持一下！有问题评论区见，知无不言！**
+
+---
+
+## 网页版一键部署（本项目附带的 Web UI）
+
+不想敲命令？本项目自带一个**零依赖**的网页部署工具，把上面的 `node deploy-cloudflare-vless.mjs ...` 封装成了表单页面：填 Account ID / 域名 / Cookie，点「部署」，页面实时滚动显示进度，结束直接给订阅地址和复制按钮。
+
+**运行（任意装了 Node.js 的机器，包括手机 Termux）：**
+
+```bash
+# Termux 先装 Node
+pkg install node
+
+# 进入仓库目录
+cd /path/to/cloudflare-vless-worker-deploy
+
+# 启动（默认端口 3000，可用 PORT 环境变量改）
+node web/server.mjs
+```
+
+启动后浏览器打开：
+
+- 本机：`http://127.0.0.1:3000`
+- 手机 Termux 同局域网其他设备：`http://192.168.x.x:3000`（用 `ifconfig` 看手机局域网 IP）
+
+**功能：**
+
+- 表单填必填项 + 可选覆盖项（子域名 / Worker 名 / 固定 UUID）
+- 实时进度（0/7 → 7/7 每步回传）
+- 部署完一键复制订阅地址
+- 出错不崩，错误信息直接显示在页面上
+
+**文件结构：**
+
+```
+lib/deploy.mjs              # 部署核心（可调用，去掉了 process.exit，日志注入式）
+web/server.mjs              # 零依赖 Node 服务，静态页 + /api/deploy 流式接口
+web/public/                 # 前端：index.html / app.js / style.css
+web/test/deploy.test.mjs    # 纯函数单测（node --test）
+deploy-cloudflare-vless.mjs # CLI 壳，复用上面的核心，参数不变
+```
+
+> 命令行党依然可以直接 `node deploy-cloudflare-vless.mjs --account-id ... --vses2 ... --zone ...`，行为不变。

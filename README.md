@@ -51,7 +51,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-
 3. 端口无脑 443，伪装域名脚本会自动找
 4. 跑完后屏幕会输出一长串 `vless://..`，直接复制丢进 v2rayN 或 Clash 就能用
 
-## **方案二：CF 大善人 + 全自动脚本部署（![:glowing_star:](https://cdn.ldstatic.com/images/emoji/twemoji/glowing_star.png?v=15) 本帖高光）**
+## **方案二：CF 大善人 + 全自动脚本部署（本帖高光）**
 
 这套方案**不需要你有一台服务器**。只要搞个域名交给 Cloudflare，剩下的全是白嫖。
 
@@ -120,7 +120,7 @@ node deploy-cloudflare-vless.mjs \
    - **特点**：老牌免费客户端，注册后能免费使用一定额度。
    - **适用**：免费层有流量和速度限制，且部分节点 IP 经常被针对性封锁，作为备用。
 
-> **![:wrapped_gift:](https://cdn.ldstatic.com/images/emoji/twemoji/wrapped_gift.png?v=15) 附赠：0 成本注册美区 Apple ID 下载这些 App**
+> **附赠：0 成本注册美区 Apple ID 下载这些 App**
 >
 > 浏览器打开https://www.icloud.com.cn/ ，地区选**美国**，手机号**直接填你的 +86 手机号**（可以正常收验证码！）。注册好后，去 App Store 登录。
 

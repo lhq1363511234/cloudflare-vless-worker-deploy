@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>【喂饭级教程】2026 终极免费高速访问vpn方案：从 VPS 到 CF 全自动脚本一键部署</title>
+<style>
+:root{
+  --bg:#f7f8fa; --card:#ffffff; --text:#1f2328; --muted:#57606a;
+  --accent:#1f6feb; --accent2:#8957e5; --border:#e3e6ea; --code:#0d1117;
+  --quote:#eef4ff; --ph:#eef1f5;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1117; --card:#161b22; --text:#e6edf3; --muted:#9da7b3;
+    --accent:#58a6ff; --accent2:#bc8cff; --border:#30363d; --code:#010409;
+    --quote:#15233b; --ph:#1b212b;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.75;font-size:16px}
+header.hero{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;padding:48px 20px 36px;text-align:center}
+header.hero h1{margin:0 0 10px;font-size:clamp(22px,4vw,34px);line-height:1.3}
+header.hero p{margin:0;opacity:.92;font-size:15px}
+nav.toc{max-width:900px;margin:18px auto;padding:0 16px}
+nav.toc a{display:block;padding:8px 12px;margin:4px 0;border-radius:8px;
+  background:var(--card);border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:15px;transition:.15s}
+nav.toc a:hover{border-color:var(--accent);transform:translateX(3px)}
+nav.toc a.nav-3{margin-left:18px;font-size:14px;color:var(--muted)}
+main{max-width:900px;margin:0 auto;padding:8px 16px 60px}
+h2,h3,h4{line-height:1.4;margin:34px 0 12px;scroll-margin-top:16px}
+h2{border-left:5px solid var(--accent);padding-left:12px;font-size:23px}
+h3{font-size:19px;color:var(--accent)}
+h4{font-size:16px;color:var(--muted)}
+p{margin:12px 0}
+a{color:var(--accent)}
+code{background:rgba(127,127,127,.16);padding:2px 6px;border-radius:5px;font-size:90%;
+  font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+pre{background:var(--code);color:#e6edf3;padding:16px;border-radius:10px;overflow:auto;
+  border:1px solid var(--border);font-size:14px;line-height:1.6}
+pre code{background:none;padding:0;color:inherit;font-size:14px}
+ul,ol{padding-left:24px;margin:12px 0}
+li{margin:6px 0}
+blockquote{background:var(--quote);border-left:4px solid var(--accent);
+  margin:14px 0;padding:12px 16px;border-radius:0 8px 8px 0;color:var(--text)}
+figure.img-ph{margin:18px 0;border:2px dashed var(--border);border-radius:12px;overflow:hidden;background:var(--ph)}
+.img-ph-box{height:140px;display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:var(--muted);background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(127,127,127,.06) 12px,rgba(127,127,127,.06) 24px)}
+.img-ph figcaption{padding:10px 14px;font-size:13px;color:var(--muted);text-align:center;border-top:1px solid var(--border)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:18px 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+footer{max-width:900px;margin:0 auto;padding:24px 16px 50px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>【喂饭级教程】2026 终极免费高速访问vpn方案：从 VPS 到 CF 全自动脚本一键部署</h1>
+  <p>完全免费 · 从 VPS 到 Cloudflare 全自动脚本一键部署</p>
+</header>
+<nav class="toc">
+  <a class="nav-1" href="#h-喂饭级教程-2026-终极免费高速访问vpn方案-从-vps-到-cf-全自动脚本一键部署">**【喂饭级教程】2026 终极免费高速访问vpn方案：从 VPS 到 CF 全自动脚本一键部署**</a>
+      <a class="nav-2" href="#h-方案一-免费小鸡-vps-一键傻瓜脚本">**方案一：免费小鸡 (VPS) + 一键傻瓜脚本**</a>
+      <a class="nav-2" href="#h-方案二-cf-大善人-全自动脚本部署-本帖高光">**方案二：CF 大善人 + 全自动脚本部署（ 本帖高光）**</a>
+      <a class="nav-3" href="#h-1-准备工作">**1. 准备工作**</a>
+      <a class="nav-3" href="#h-2-获取-cf-的必要字符串-这里可以参考这位佬友-其中github脚本也来自这位佬友-https-linux-do-t-topic-2401836">**2. 获取 CF 的必要字符串  [这里可以参考这位佬友，其中github脚本也来自这位佬友](https://linux.do/t/topic/2401836)**</a>
+      <a class="nav-3" href="#h-3-一键起飞">**3. 一键起飞**</a>
+      <a class="nav-2" href="#h-方案三-临时用-纯手机党备用">**方案三：临时用 / 纯手机党备用**</a>
+</nav>
+<main>
+<h1 id="h-喂饭级教程-2026-终极免费高速访问vpn方案-从-vps-到-cf-全自动脚本一键部署"><strong>【喂饭级教程】2026 终极免费高速访问vpn方案：从 VPS 到 CF 全自动脚本一键部署</strong></h1>
+<p>作为资深白嫖党，今天给大家做个<strong>完全免费</strong>的方法</p>
+<p>本文有传统的 VPS 玩法，还<strong>有基于 Node.js 的 Cloudflare 纯自动化部署脚本</strong>（无需进 CF 后台点鼠标，一行命令跑通）。</p>
+<p><strong>① 免费探针鸡</strong></p>
+<p>VPS + <code>fscarmen 一键脚本</code> (Reality) 免费（著名的google300刀 ）</p>
+<p>看 VPS 线路 中（怕被墙） 有免费小鸡、想独享资源的佬友。</p>
+<p><strong>② CF 大善人</strong> Cloudflare Workers + <strong>自动部署脚本</strong> 几块钱买个域名（或白嫖） 高（优选 IP 起飞） 极高 <strong>强烈推荐！</strong> 追求极致白嫖、不想管服务器死活的佬友。</p>
+<p><strong>③ 应急大厂羊毛</strong> Cloudflare WARP / ProtonVPN / nthlink /lantern</p>
+<figure class="img-ph"><div class="img-ph-box">📷 图1</div><figcaption>方案三 概览截图</figcaption></figure>
+<p>费用<code>0</code> 一般 凑合 临时救急、只在手机端轻度使用的人。</p>
+<h2 id="h-方案一-免费小鸡-vps-一键傻瓜脚本"><strong>方案一：免费小鸡 (VPS) + 一键傻瓜脚本</strong></h2>
+<p>甲骨文、谷歌云、各种云（Oracle Cloud:visa申请可以去YouTube搜索如何免费注册）（ 踩的坑多了，自然就知道怎么免费注册visa了）</p>
+<p>不用手写 config，直接用大佬的脚本。</p>
+<p><strong>操作步骤（一条命令）：</strong></p>
+<p>SSH 连上你的机器，跑 fscarmen 大佬的脚本：</p>
+<pre><code class="lang-bash">bash &lt;(curl -fsSL [https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh](https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh))</code></pre>
+<p><strong>提示</strong></p>
+<ol><li>菜单选 <strong>安装 sing-box</strong>。</li><li>协议必须选 <strong>VLESS-Reality</strong>（目前最稳，连域名都省了）</li><li>端口无脑 443，伪装域名脚本会自动找</li><li>跑完后屏幕会输出一长串 <code>vless://..</code>，直接复制丢进 v2rayN 或 Clash 就能用</li></ol>
+<h2 id="h-方案二-cf-大善人-全自动脚本部署-本帖高光"><strong>方案二：CF 大善人 + 全自动脚本部署（ 本帖高光）</strong></h2>
+<p>这套方案<strong>不需要你有一台服务器</strong>。只要搞个域名交给 Cloudflare，剩下的全是白嫖。</p>
+<p>不要再用传统的“进控制台建 Worker → 复制代码 → 绑域名”的复杂步骤，<strong>作为 Linux Do 的佬友，我们必须用命令行自动解决！</strong></p>
+<h3 id="h-1-准备工作"><strong>1. 准备工作</strong></h3>
+<ul><li>去 <code>https://my.dnshe.com/</code> 白嫖个免费域名。</li></ul>
+<figure class="img-ph"><div class="img-ph-box">📷 图2</div><figcaption>dnshe 免费域名获取截图</figcaption></figure>
+<ul><li>电脑上装好 <code>Node.js</code>。</li><li>下载社区的自动化神级脚本：<code>deploy-cloudflare-vless.mjs</code> 和配套源码 <code>worker.fixed.js</code>。（代码各位可以自行去 GitHub 搜，或者自己写个简单的 API 调用）。</li><li>找不到用这<a href="https://github.com/lhq1363511234/cloudflare-vless-worker-deploy" target="_blank" rel="noopener">GitHub仓库node脚本</a>，再不会直接用目前最火workbuddy，以上所有内容都可以发给它他给你部署操作，<strong>除了方案三</strong></li></ul>
+<figure class="img-ph"><div class="img-ph-box">📷 图3</div><figcaption>Node.js 与脚本就绪截图</figcaption></figure>
+<h3 id="h-2-获取-cf-的必要字符串-这里可以参考这位佬友-其中github脚本也来自这位佬友-https-linux-do-t-topic-2401836"><strong>2. 获取 CF 的必要字符串  <a href="https://linux.do/t/topic/2401836" target="_blank" rel="noopener">这里可以参考这位佬友，其中github脚本也来自这位佬友</a></strong></h3>
+<p>登录 Cloudflare 网页后台，按 <code>F12</code> 打开开发者工具：</p>
+<ol><li>拿到你的 <strong>Account ID</strong>（URL 里的那一长串字符）。</li></ol>
+<figure class="img-ph"><div class="img-ph-box">📷 图4</div><figcaption>Cloudflare Account ID 位置截图</figcaption></figure>
+<ol><li>在 Application/Storage 的 Cookies 里，找到名为 <strong><code>vses2</code></strong> 的 Cookie 值并复制。</li></ol>
+<figure class="img-ph"><div class="img-ph-box">📷 图5</div><figcaption>vses2 Cookie 位置截图</figcaption></figure>
+<h3 id="h-3-一键起飞"><strong>3. 一键起飞</strong></h3>
+<h4 id="h-3-1-不用脚本的佬可以参考类似-github-搜索开源项目-edgetunnel-及其衍生版本"><strong>3.1 不用脚本的佬可以参考类似 GitHub 搜索开源项目 <code>edgetunnel</code> 及其衍生版本</strong></h4>
+<ul><li><strong>BPB-Worker-Panel</strong>（推荐）：一个可视化面板 Worker。部署后打开它的网页，填好域名、UUID、传输方式，面板自动生成订阅链接 + 二维码，还能改配置步骤也简单。</li><li><strong>EDGETunnel</strong>：单文件 Worker 脚本（VLESS / Trojan），部署即用，输出 Clash 订阅。更轻量、配置项少。</li></ul>
+<h4 id="h-3-2-用脚本则在终端里跑下面这行命令"><strong>3.2 用脚本则在终端里跑下面这行命令：</strong></h4>
+<pre><code class="lang-bash">node deploy-cloudflare-vless.mjs \
+  --account-id '你的 Cloudflare 账号 ID' \
+  --vses2 '你的 vses2 cookie 值' \
+  --zone 你的域名</code></pre>
+<p>*如果报错提示 Cookie 拦截，可以加完整参数：*</p>
+<p><strong>报错就让workbuddy检测修复</strong></p>
+<figure class="img-ph"><div class="img-ph-box">📷 图6</div><figcaption>部署报错示例截图</figcaption></figure>
+<pre><code class="lang-">--cookie '完整Cookie字符串' --atok 'x-atok值'</code></pre>
+<h2 id="h-方案三-临时用-纯手机党备用"><strong>方案三：临时用 / 纯手机党备用</strong></h2>
+<p>如果哪天你的小鸡被封了，CF 的域名也炸了（虽然罕见），白嫖 App ：</p>
+<ol><li><strong>Cloudflare WARP (1.1.1.1)</strong>：客户端一键连。如果你有 CF 账号开通了 Zero Trust，无限制高速流量随便用。</li><li><strong>ProtonVPN</strong>：永久免费层不限流量。速度虽然限了，但极度抗封锁。</li><li><strong>nthlink</strong></li></ol>
+<ul><li><strong>特点</strong>：主打“一键就能用”（Windows / macOS / 安卓端），没有任何复杂的配置。</li><li><strong>适用</strong>：不限速，节点少，高峰期（晚上 8-11 点）比较拥挤。</li></ul>
+<ol><li><strong>Lantern (蓝灯)</strong></li></ol>
+<ul><li><strong>特点</strong>：老牌免费客户端，注册后能免费使用一定额度。</li><li><strong>适用</strong>：免费层有流量和速度限制，且部分节点 IP 经常被针对性封锁，作为备用。</li></ul>
+<blockquote><strong> 附赠：0 成本注册美区 Apple ID 下载这些 App</strong>
+
+浏览器打开https://www.icloud.com.cn/ ，地区选<strong>美国</strong>，手机号<strong>直接填你的 +86 手机号</strong>（可以正常收验证码！）。注册好后，去 App Store 登录。</blockquote>
+<p>最后，所有免费资源随时可能被大厂回收/调整策略。</p>
+<p><strong>觉得有用的佬友，点赞/收藏支持一下！有问题评论区见，知无不言！</strong></p>
+</main>
+<footer>
+  本教程由社区整理，所有免费资源随时可能被厂商回收或调整策略，请自行评估风险。<br>
+  部署脚本与本站源码见 GitHub 仓库。
+</footer>
+</body>
+</html>

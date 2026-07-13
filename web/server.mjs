@@ -9,6 +9,8 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runDeploy } from '../lib/deploy.mjs';
+import { buildInstaller, buildFscarmenCommand, extractVlessLink } from '../lib/gen-command.mjs';
+import { runSshDeploy } from '../lib/ssh-deploy.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -103,9 +105,73 @@ function handleDeploy(req, res) {
     .finally(() => res.end());
 }
 
+function handleGenCommand(req, res) {
+  readBody(req)
+    .then(async (raw) => {
+      const body = JSON.parse(raw || '{}');
+      const style = body.style === 'fscarmen' ? 'fscarmen' : 'installer';
+      const command = style === 'fscarmen'
+        ? buildFscarmenCommand()
+        : buildInstaller({
+            protocol: body.protocol,
+            port: body.port,
+            uuid: body.uuid,
+            serverName: body.serverName,
+            name: body.name,
+            flow: body.flow,
+          });
+      sendJson(res, 200, { style, command });
+    })
+    .catch((error) => sendJson(res, 400, { error: error.message || String(error) }));
+}
+
+function handleSshDeploy(req, res) {
+  res.writeHead(200, {
+    'Content-Type': 'application/x-ndjson; charset=utf-8',
+    'Cache-Control': 'no-store',
+    'Connection': 'keep-alive',
+    'X-Accel-Buffering': 'no',
+  });
+  const writeLine = (obj) => res.write(`${JSON.stringify(obj)}\n`);
+
+  readBody(req)
+    .then(async (raw) => {
+      const body = JSON.parse(raw || '{}');
+      const script = body.script || buildInstaller({
+        protocol: body.protocol,
+        port: body.port,
+        uuid: body.uuid,
+        serverName: body.serverName,
+        name: body.name,
+        flow: body.flow,
+      });
+      const result = await runSshDeploy(
+        {
+          host: body.host,
+          port: body.portSsh || 22,
+          user: body.user,
+          password: body.password,
+          script,
+        },
+        (step, msg) => writeLine({ step, msg }),
+      );
+      writeLine({ done: true, result: { vlessUrl: result.vlessUrl } });
+    })
+    .catch((error) => writeLine({ error: error.message || String(error) }))
+    .finally(() => res.end());
+}
+
 const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/api/deploy') {
     handleDeploy(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/gen-command') {
+    handleGenCommand(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url === '/api/ssh-deploy') {
+    handleSshDeploy(req, res);
     return;
   }
   if (req.method === 'GET') {

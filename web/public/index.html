@@ -3,73 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cloudflare VLESS 一键部署</title>
+  <title>免费高速访问 · 三方案一键部署</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <main class="card">
-    <h1>Cloudflare VLESS 一键部署</h1>
-    <p class="sub">填好下面的信息，点「部署」，坐等订阅地址。</p>
+    <h1>免费高速访问 · 三方案部署台</h1>
+    <p class="sub">完全免费的三套方案，按需选。方案二是真·一键部署，方案一生成脚本/SSH 直装，方案三是应急软件。</p>
 
-    <form id="deploy-form">
-      <fieldset>
-        <legend>必填</legend>
-        <label>Cloudflare Account ID
-          <input type="text" name="accountId" placeholder="a00e7e97..." required />
-        </label>
-        <label>根域名 (Zone)
-          <input type="text" name="zone" placeholder="example.com" required />
-        </label>
-      </fieldset>
+    <nav class="tabs">
+      <button class="tab active" data-tab="plan2">方案二 · CF 一键部署</button>
+      <button class="tab" data-tab="plan1">方案一 · VPS 脚本</button>
+      <button class="tab" data-tab="plan3">方案三 · 免费软件</button>
+    </nav>
 
-      <fieldset>
-        <legend>登录态（二选一）</legend>
-        <label>vses2（或完整 Cookie）
-          <input type="text" name="vses2" placeholder="cfes-..." autocomplete="off" />
-        </label>
-        <label>完整 Cookie（被拦截时填这个）
-          <input type="text" name="cookie" placeholder="vses2=...; cf_clearance=..." autocomplete="off" />
-        </label>
-        <label>x-atok（可选）
-          <input type="text" name="atok" placeholder="x-atok 值" autocomplete="off" />
-        </label>
-        <label>或已有 API Token
-          <input type="text" name="token" placeholder="已有 Token 直接填这" autocomplete="off" />
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>可选</legend>
-        <label>子域名 (hostname)
-          <input type="text" name="hostname" placeholder="随机生成，如 ab12.example.com" />
-        </label>
-        <label>Worker 名
-          <input type="text" name="workerName" placeholder="随机，如 svc-xxxxxxxx" />
-        </label>
-        <label>固定 UUID
-          <input type="text" name="uuid" placeholder="留空则随机生成" />
-        </label>
-      </fieldset>
-
-      <fieldset class="checks">
-        <label class="check"><input type="checkbox" name="assumeNsReady" checked /> 域名 NS 已设置为 Cloudflare 分配的两台</label>
-        <label class="check"><input type="checkbox" name="skipTest" checked /> 跳过代理测速（Termux 无 mihomo）</label>
-      </fieldset>
-
-      <button type="submit" id="deploy-btn">部署</button>
-    </form>
-
-    <section id="log" class="log" hidden></section>
-
-    <section id="result" class="result" hidden>
-      <h2>部署完成 🎉</h2>
-      <p>订阅地址：</p>
-      <div class="sub-row">
-        <code id="sub-url"></code>
-        <button id="copy-btn" type="button">复制</button>
-      </div>
-      <p class="hint">把这个地址导入 Clash Verge / v2rayN / Mihomo 即可使用。</p>
+    <!-- ===================== 方案二 ===================== -->
+    <section id="plan2" class="tab-panel">
+      <p class="panel-hint">填好下面的信息，点「部署」，坐等订阅地址。（无需自有服务器）</p>
+      <form id="deploy-form">
+        <fieldset>
+          <legend>必填</legend>
+          <label>Cloudflare Account ID
+            <input type="text" name="accountId" placeholder="a00e7e97..." required />
+          </label>
+          <label>根域名 (Zone)
+            <input type="text" name="zone" placeholder="example.com" required />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>登录态（二选一）</legend>
+          <label>vses2（或完整 Cookie）
+            <input type="text" name="vses2" placeholder="cfes-..." autocomplete="off" />
+          </label>
+          <label>完整 Cookie（被拦截时填这个）
+            <input type="text" name="cookie" placeholder="vses2=...; cf_clearance=..." autocomplete="off" />
+          </label>
+          <label>x-atok（可选）
+            <input type="text" name="atok" placeholder="x-atok 值" autocomplete="off" />
+          </label>
+          <label>或已有 API Token
+            <input type="text" name="token" placeholder="已有 Token 直接填这" autocomplete="off" />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>可选</legend>
+          <label>子域名 (hostname)
+            <input type="text" name="hostname" placeholder="随机生成，如 ab12.example.com" />
+          </label>
+          <label>Worker 名
+            <input type="text" name="workerName" placeholder="随机，如 svc-xxxxxxxx" />
+          </label>
+          <label>固定 UUID
+            <input type="text" name="uuid" placeholder="留空则随机生成" />
+          </label>
+        </fieldset>
+        <fieldset class="checks">
+          <label class="check"><input type="checkbox" name="assumeNsReady" checked /> 域名 NS 已设置为 Cloudflare 分配的两台</label>
+          <label class="check"><input type="checkbox" name="skipTest" checked /> 跳过代理测速（Termux 无 mihomo）</label>
+        </fieldset>
+        <button type="submit" id="deploy-btn">部署</button>
+      </form>
+      <section id="log" class="log" hidden></section>
+      <section id="result" class="result" hidden>
+        <h2>部署完成 🎉</h2>
+        <p>订阅地址：</p>
+        <div class="sub-row">
+          <code id="sub-url"></code>
+          <button id="copy-btn" type="button">复制</button>
+        </div>
+        <p class="hint">把这个地址导入 Clash Verge / v2rayN / Mihomo 即可使用。</p>
+      </section>
     </section>
+
+    <!-- ===================== 方案一 ===================== -->
+    <section id="plan1" class="tab-panel" hidden>
+      <p class="panel-hint">免费小鸡（甲骨文/谷歌云/各路神仙机）上自建 sing-box。下方先生成安装脚本，再可选 SSH 直装。</p>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" data-sub="gen">① 生成安装脚本</button>
+        <button class="sub-tab" data-sub="ssh">② SSH 一键部署</button>
+        <button class="sub-tab" data-sub="lazy">懒人法 · fscarmen</button>
+      </div>
+
+      <!-- 生成脚本 -->
+      <div id="gen" class="sub-panel">
+        <fieldset>
+          <legend>脚本参数</legend>
+          <label>协议
+            <select name="protocol">
+              <option value="vless-reality">VLESS + Reality（推荐，免域名免证书）</option>
+              <option value="vless-ws">VLESS + WS + TLS（需域名证书）</option>
+              <option value="trojan">Trojan（需域名证书）</option>
+            </select>
+          </label>
+          <label>端口
+            <input type="text" name="port" value="443" />
+          </label>
+          <label>伪装域名 (Reality server_name)
+            <input type="text" name="serverName" value="www.apple.com" />
+          </label>
+          <label>固定 UUID（留空则脚本自动生成）
+            <input type="text" name="uuid" placeholder="留空随机" autocomplete="off" />
+          </label>
+          <label>客户端备注名
+            <input type="text" name="name" value="CF-VPS" />
+          </label>
+        </fieldset>
+        <button type="button" id="gen-btn">生成命令</button>
+        <section id="gen-out" class="result" hidden>
+          <p>复制下面的脚本，在 VPS 上 <code>bash &lt;脚本&gt;</code> 直接跑：</p>
+          <pre id="gen-script" class="code-block"></pre>
+          <div class="sub-row">
+            <button id="gen-copy" type="button">复制脚本</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- SSH 直装 -->
+      <div id="ssh" class="sub-panel" hidden>
+        <fieldset>
+          <legend>VPS 连接信息</legend>
+          <label>主机地址 (host)
+            <input type="text" name="sshHost" placeholder="1.2.3.4 或 vps.example.com" autocomplete="off" />
+          </label>
+          <label>SSH 端口
+            <input type="text" name="sshPort" value="22" />
+          </label>
+          <label>用户名
+            <input type="text" name="sshUser" placeholder="root" autocomplete="off" />
+          </label>
+          <label>密码
+            <input type="password" name="sshPass" placeholder="VPS 登录密码" autocomplete="off" />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>脚本参数（同「生成脚本」）</legend>
+          <label>协议
+            <select name="sshProtocol">
+              <option value="vless-reality">VLESS + Reality（推荐）</option>
+              <option value="vless-ws">VLESS + WS + TLS</option>
+              <option value="trojan">Trojan</option>
+            </select>
+          </label>
+          <label>端口
+            <input type="text" name="sshPort2" value="443" />
+          </label>
+          <label>伪装域名
+            <input type="text" name="sshServerName" value="www.apple.com" />
+          </label>
+        </fieldset>
+        <button type="button" id="ssh-btn">SSH 一键部署</button>
+        <section id="ssh-log" class="log" hidden></section>
+        <section id="ssh-result" class="result" hidden>
+          <h2>部署完成 🎉</h2>
+          <p>分享链接：</p>
+          <div class="sub-row">
+            <code id="ssh-url"></code>
+            <button id="ssh-copy" type="button">复制</button>
+          </div>
+          <p class="hint">复制到 v2rayN / Clash 即可使用。</p>
+        </section>
+      </div>
+
+      <!-- 懒人法 -->
+      <div id="lazy" class="sub-panel" hidden>
+        <p>社区一键脚本（交互式菜单，跑起来后按提示选 <b>安装 sing-box → VLESS-Reality → 端口 443</b>）：</p>
+        <pre class="code-block">bash &lt;(curl -fsSL https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)</pre>
+        <p class="hint">跑完屏幕会输出 <code>vless://...</code> 链接，直接丢进客户端即可。注意：菜单是交互式的，SSH 直装请改用上方「生成安装脚本」方式（非交互）。</p>
+      </div>
+    </section>
+
+    <!-- ===================== 方案三 ===================== -->
+    <section id="plan3" class="tab-panel" hidden>
+      <p class="panel-hint">不折腾服务器时的应急方案，纯客户端软件，手机党友好。</p>
+      <div class="cards">
+        <div class="info-card">
+          <h3>nthlink</h3>
+          <p>主打“一键就能用”，Win / macOS / 安卓端无需复杂配置，不限速。节点少，晚高峰略挤。</p>
+          <a href="https://nthlink.com/" target="_blank" rel="noopener">官网下载 ↗</a>
+        </div>
+        <div class="info-card">
+          <h3>Lantern（蓝灯）</h3>
+          <p>老牌免费客户端，注册后可用一定额度。免费层有流量/速度限制，部分节点易被针对性封锁。</p>
+          <a href="https://getlantern.org/" target="_blank" rel="noopener">官网下载 ↗</a>
+        </div>
+        <div class="info-card">
+          <h3>Cloudflare WARP</h3>
+          <p>1.1.1.1 客户端一键连。若开通 CF Zero Trust，可获更稳定高速流量。系统级 VPN，适合兜底。</p>
+          <a href="https://one.one.one.one/" target="_blank" rel="noopener">官网 ↗</a>
+        </div>
+        <div class="info-card">
+          <h3>ProtonVPN</h3>
+          <p>永久免费层不限流量，速度有限但极度抗封锁。适合长期挂一个保底通道。</p>
+          <a href="https://protonvpn.com/" target="_blank" rel="noopener">官网 ↗</a>
+        </div>
+      </div>
+
+      <div class="gift">
+        <h3>附赠：0 成本注册美区 Apple ID</h3>
+        <ol>
+          <li>浏览器打开 <code>https://www.icloud.com.cn/</code>，地区选 <b>美国</b>。</li>
+          <li>手机号<b>直接填你的 +86 手机号</b>（可正常收验证码）。</li>
+          <li>注册好后去 App Store 登录，即可下载 Shadowrocket / Stash 等（仅下 App，<b>别绑国区付款方式</b>）。</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer class="friend-links">
+      <h3>友情链接</h3>
+      <ul><li><a href="https://linux.do" target="_blank" rel="noopener">Linux.do</a></li></ul>
+    </footer>
   </main>
 
   <script src="/app.js"></script>

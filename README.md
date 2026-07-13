@@ -152,21 +152,30 @@ node web/server.mjs
 - 本机：`http://127.0.0.1:3456`
 - 手机 Termux 同局域网其他设备：`http://192.168.x.x:3456`（用 `ifconfig` 看手机局域网 IP）
 
-**功能：**
+**功能（三个方案合一的部署台）：**
 
-- 表单填必填项 + 可选覆盖项（子域名 / Worker 名 / 固定 UUID）
-- 实时进度（0/7 → 7/7 每步回传）
-- 部署完一键复制订阅地址
-- 出错不崩，错误信息直接显示在页面上
+- **方案二 · CF 一键部署**：表单填 Cloudflare 信息，实时进度（0/7 → 7/7），完事给订阅地址。无需自有服务器。
+- **方案一 · VPS 脚本**：
+  - ① 生成安装脚本：选协议（VLESS+Reality 推荐 / WS+TLS / Trojan）、端口、伪装域名，一键生成**非交互**的 sing-box 安装 bash 脚本，复制去 VPS 跑即可。
+  - ② SSH 一键部署：填 VPS 主机/端口/用户/密码，后端经 `sshpass` 把脚本传到远端直装，实时回传日志并抽取 `vless://` 分享链接。
+  - ③ 懒人法：直接给出 fscarmen 社区一键脚本（交互式菜单）。
+- **方案三 · 免费软件**：nthlink / Lantern / Cloudflare WARP / ProtonVPN 下载卡片 + 美区 Apple ID 注册指南。
 
 **文件结构：**
 
 ```
-lib/deploy.mjs              # 部署核心（可调用，去掉了 process.exit，日志注入式）
-web/server.mjs              # 零依赖 Node 服务，静态页 + /api/deploy 流式接口
-web/public/                 # 前端：index.html / app.js / style.css
-web/test/deploy.test.mjs    # 纯函数单测（node --test）
-deploy-cloudflare-vless.mjs # CLI 壳，复用上面的核心，参数不变
+lib/deploy.mjs              # 方案二部署核心（可调用，去掉了 process.exit，日志注入式）
+lib/gen-command.mjs         # 方案一安装脚本生成器（纯函数：buildInstaller / buildFscarmenCommand / extractVlessLink）
+lib/ssh-deploy.mjs          # 方案一 SSH 远程执行（sshpass + ssh，流式回传）
+web/server.mjs              # 零依赖 Node 服务：/api/deploy、/api/gen-command、/api/ssh-deploy
+web/public/                 # 前端：index.html / app.js / style.css（三 Tab）
+web/test/                   # 纯函数单测（deploy.test.mjs + gen-command.test.mjs，node --test）
+deploy-cloudflare-vless.mjs # CLI 壳，复用方案二核心，参数不变
 ```
 
 > 命令行党依然可以直接 `node deploy-cloudflare-vless.mjs --account-id ... --vses2 ... --zone ...`，行为不变。
+> 方案一 SSH 部署依赖远端有 `sshpass` + `openssh`（Termux：`pkg install openssh sshpass`；Debian：`apt install sshpass`）。
+
+## 友情链接
+
+- [Linux.do](https://linux.do)

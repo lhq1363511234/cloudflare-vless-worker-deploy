@@ -143,14 +143,14 @@ pkg install node
 # 进入仓库目录
 cd /path/to/cloudflare-vless-worker-deploy
 
-# 启动（默认端口 3000，可用 PORT 环境变量改）
+# 启动（默认端口 3456，可用 PORT 环境变量改）
 node web/server.mjs
 ```
 
 启动后浏览器打开：
 
-- 本机：`http://127.0.0.1:3000`
-- 手机 Termux 同局域网其他设备：`http://192.168.x.x:3000`（用 `ifconfig` 看手机局域网 IP）
+- 本机：`http://127.0.0.1:3456`
+- 手机 Termux 同局域网其他设备：`http://192.168.x.x:3456`（用 `ifconfig` 看手机局域网 IP）
 
 **功能：**
 

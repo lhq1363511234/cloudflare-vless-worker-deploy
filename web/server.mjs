@@ -13,7 +13,7 @@ import { runDeploy } from '../lib/deploy.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const ROOT_DIR = path.resolve(__dirname, '..');
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3456;
 const WORKER_SOURCE = path.join(ROOT_DIR, 'worker.fixed.js');
 
 const MIME = {

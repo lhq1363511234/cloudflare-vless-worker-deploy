@@ -23,7 +23,7 @@ Cloudflare Workers + **自动部署脚本**
 **③ 应急大厂羊毛**
 Cloudflare WARP / ProtonVPN / nthlink /lantern
 
-> 📷 **[图1 · 方案总览截图]**　替换为图床/上传后的链接（原图为本机 Typora 本地图片，已移除以免裂图）
+![图1 · nthLink 多端下载](images/fig1-nthlink.png)
 
 费用`0`
 一般
@@ -61,13 +61,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-
 
 - 去 `https://my.dnshe.com/` 白嫖个免费域名。
 
-> 📷 **[图2 · dnshe 免费域名获取截图]**　替换为图床/上传后的链接
+![图2 · DNShe 免费域名注册](images/fig2-dnshe.png)
 
 - 电脑上装好 `Node.js`。
 - 下载社区的自动化神级脚本：`deploy-cloudflare-vless.mjs` 和配套源码 `worker.fixed.js`。（代码各位可以自行去 GitHub 搜，或者自己写个简单的 API 调用）。
 - 找不到用这[GitHub仓库node脚本](https://github.com/lhq1363511234/cloudflare-vless-worker-deploy)，再不会直接用目前最火workbuddy，以上所有内容都可以发给它他给你部署操作，**除了方案三**
 
-> 📷 **[图3 · Node.js 与脚本就绪截图]**　替换为图床/上传后的链接
+![图3 · GitHub 仓库与脚本文件](images/fig3-github-repo.png)
 
 ### **2. 获取 CF 的必要字符串  [这里可以参考这位佬友，其中github脚本也来自这位佬友](https://linux.do/t/topic/2401836)**
 
@@ -75,11 +75,11 @@ bash <(curl -fsSL https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-
 
 1. 拿到你的 **Account ID**（URL 里的那一长串字符）。
 
-> 📷 **[图4 · Cloudflare Account ID 位置截图]**　替换为图床/上传后的链接
+![图4 · Cloudflare Account ID 位置](images/fig4-account-id.png)
 
 1. 在 Application/Storage 的 Cookies 里，找到名为 **`vses2`** 的 Cookie 值并复制。
 
-> 📷 **[图5 · vses2 Cookie 位置截图]**　替换为图床/上传后的链接
+![图5 · vses2 Cookie 位置](images/fig5-vses2-cookie.png)
 
 ### **3. 一键起飞**
 
@@ -101,7 +101,7 @@ node deploy-cloudflare-vless.mjs \
 
 **报错就让workbuddy检测修复**
 
-> 📷 **[图6 · 部署报错示例截图]**　替换为图床/上传后的链接
+![图6 · WorkBuddy 部署结果](images/fig6-workbuddy-deploy.png)
 
 ```
 --cookie '完整Cookie字符串' --atok 'x-atok值'

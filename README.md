@@ -137,11 +137,12 @@ node deploy-cloudflare-vless.mjs \
 **运行（任意装了 Node.js 的机器，包括手机 Termux）：**
 
 ```bash
-# Termux 先装 Node
-pkg install node
+# Termux 先装 Node 和 git
+pkg install node git
 
-# 进入仓库目录
-cd /path/to/cloudflare-vless-worker-deploy
+# 下载仓库
+git clone https://github.com/lhq1363511234/cloudflare-vless-worker-deploy.git
+cd cloudflare-vless-worker-deploy
 
 # 启动（默认端口 3456，可用 PORT 环境变量改）
 node web/server.mjs

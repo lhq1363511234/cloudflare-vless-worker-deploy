@@ -137,11 +137,13 @@ node deploy-cloudflare-vless.mjs \
 **运行（任意装了 Node.js 的机器，包括手机 Termux）：**
 
 ```bash
-# Termux 先装 Node 和 git
-pkg install node git
+# Termux 先装 Node（不需要 git）
+pkg install node
 
-# 下载仓库
-git clone https://github.com/lhq1363511234/cloudflare-vless-worker-deploy.git
+# 下载仓库：浏览器打开下面的链接，点「Download ZIP」
+# https://github.com/lhq1363511234/cloudflare-vless-worker-deploy
+
+# 解压后进入目录
 cd cloudflare-vless-worker-deploy
 
 # 启动（默认端口 3456，可用 PORT 环境变量改）
